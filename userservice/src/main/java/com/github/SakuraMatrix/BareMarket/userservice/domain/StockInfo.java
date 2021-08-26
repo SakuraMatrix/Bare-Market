@@ -1,4 +1,4 @@
-package com.github.SakuraMatrix.BareMarket.userservice.Domain;
+package com.github.SakuraMatrix.BareMarket.userservice.domain;
 
 public class StockInfo {
     private String symbol;

@@ -1,6 +1,6 @@
 package com.github.SakuraMatrix.BareMarket.userservice.service;
 
-import com.github.SakuraMatrix.BareMarket.userservice.Domain.Balance;
+import com.github.SakuraMatrix.BareMarket.userservice.domain.Balance;
 import com.github.SakuraMatrix.BareMarket.userservice.repository.BalanceRepository;
 
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class BalanceService {
         return balanceRepository.findById(1);
     }
 
-    public Mono<Balance> set(Balance balance) {
-        return balanceRepository.save(balance);
+    public Mono<Balance> set(double balance) {
+        return balanceRepository.save(new Balance(1, balance));
     }
 }

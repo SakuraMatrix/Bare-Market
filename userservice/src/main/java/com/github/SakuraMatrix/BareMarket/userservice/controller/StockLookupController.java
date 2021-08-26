@@ -1,6 +1,6 @@
 package com.github.SakuraMatrix.BareMarket.userservice.controller;
 
-import com.github.SakuraMatrix.BareMarket.userservice.Domain.StockInfo;
+import com.github.SakuraMatrix.BareMarket.userservice.domain.StockInfo;
 import com.github.SakuraMatrix.BareMarket.userservice.service.StockLookupService;
 
 import org.springframework.web.bind.annotation.GetMapping;

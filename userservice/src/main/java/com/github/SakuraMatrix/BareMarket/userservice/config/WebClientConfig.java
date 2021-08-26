@@ -1,4 +1,4 @@
-package com.github.SakuraMatrix.BareMarket.userservice;
+package com.github.SakuraMatrix.BareMarket.userservice.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
