@@ -7,5 +7,5 @@ target/
 .classpath
 .project
 
-# AWS Cassandra truststore
-cassandra_truststore.jks
+# Includes AWS credentials
+application.properties

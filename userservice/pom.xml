@@ -14,7 +14,7 @@
 	<name>demo</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>16</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -35,6 +35,16 @@
 			<groupId>io.projectreactor</groupId>
 			<artifactId>reactor-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.datastax.oss</groupId>
+			<artifactId>java-driver-core</artifactId>
+			<version>4.13.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.datastax.oss</groupId>
+			<artifactId>java-driver-query-builder</artifactId>
+			<version>4.13.0</version>
 		</dependency>
 	</dependencies>
 
