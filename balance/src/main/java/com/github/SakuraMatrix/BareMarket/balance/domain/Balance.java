@@ -1,4 +1,4 @@
-package com.github.SakuraMatrix.BareMarket.userservice.Domain;
+package com.github.SakuraMatrix.BareMarket.balance.domain;
 
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
@@ -14,11 +14,19 @@ public class Balance {
         this.balance = balance;
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
+    public int getId() {
+        return id;
     }
-
+    
     public double getBalance() {
         return balance;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 }

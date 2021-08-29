@@ -1,6 +1,6 @@
-package com.github.SakuraMatrix.BareMarket.userservice.repository;
+package com.github.SakuraMatrix.BareMarket.balance.repository;
 
-import com.github.SakuraMatrix.BareMarket.userservice.Domain.Balance;
+import com.github.SakuraMatrix.BareMarket.balance.domain.Balance;
 
 import org.springframework.data.cassandra.repository.ReactiveCassandraRepository;
 import org.springframework.stereotype.Repository;

@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.github.SakuraMatrix.BareMarket</groupId>
-	<artifactId>user-service</artifactId>
+	<artifactId>lookup</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
 		<java.version>16</java.version>
