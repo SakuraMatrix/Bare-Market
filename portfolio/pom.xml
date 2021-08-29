@@ -22,9 +22,9 @@
 			<artifactId>spring-boot-starter-data-cassandra-reactive</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.datastax.cassandra</groupId>
-			<artifactId>cassandra-driver-core</artifactId>
-			<version>4.0.0</version>
+			<groupId>com.datastax.oss</groupId>
+			<artifactId>java-driver-core</artifactId>
+			<version>4.13.0</version>
 		</dependency>
                 <dependency>
                     <groupId>org.springframework.boot</groupId>

@@ -4,8 +4,11 @@ import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyClass;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 
+import java.io.Serializable;
+
+//This is the class for the composite key
 @PrimaryKeyClass
-public class StockKey {
+public class StockKey implements Serializable{
     @PrimaryKeyColumn(type = PrimaryKeyType.PARTITIONED)
     private int id;
     @PrimaryKeyColumn(type = PrimaryKeyType.CLUSTERED)
