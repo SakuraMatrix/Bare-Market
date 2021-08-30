@@ -42,5 +42,5 @@ public class WatchlistController {
     @DeleteMapping("/{symbol}")
     public void delete(@PathVariable String symbol) {
         watchlistService.delete(symbol);
-    } // DELETE request with curl: curl localhost:8080/watchlists/GOOGL
+    } // DELETE request with curl: curl -X DELETE localhost:8080/watchlists/GOOGL
 }
