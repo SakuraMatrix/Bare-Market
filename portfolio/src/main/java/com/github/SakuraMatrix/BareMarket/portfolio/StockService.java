@@ -17,7 +17,7 @@ public class StockService {
         return stockRepository.findAll();
     }
 
-    public Mono<Stock>add(String symbol, long timestamp, String name, long price) {
+    public Mono<Stock>add(String symbol, long timestamp, String name, double price) {
         return stockRepository.save(new Stock(new StockKey(1, symbol, timestamp), name, price));
     }
 
