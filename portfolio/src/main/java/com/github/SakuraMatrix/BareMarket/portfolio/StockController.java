@@ -21,12 +21,12 @@ public class StockController {
     }// GET request with curl: curl localhost:8080/stocks
 
     @PostMapping()
-    public Mono<Stock>add(String symbol, long timestamp, String name, long price){
-        return stockService.add(symbol, timestamp, name, price);
+    public Mono<Stock>add(@RequestBody Stock stock){
+        return stockService.add(stock.getSymbol(), stock.getTimestamp(), stock.getName(), stock.getPrice());
     }
 
-    @DeleteMapping()
-    public void delete(String symbol, long timestamp){
-        stockService.delete(symbol, timestamp);
+    @DeleteMapping("/{symbol}/{timestamp}")
+    public void delete(@PathVariable String symbol, @PathVariable long timestamp){
+        stockService.delete(symbol, timestamp); // DELETE request with curl: curl -X DELETE localhost:8080/stocks/TSLA/1
     }
 }
