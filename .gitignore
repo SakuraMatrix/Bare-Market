@@ -12,5 +12,5 @@ target/
 # Intellij
 .idea/
 
-# Includes AWS credentials
+# Includes AWS credentials and API keys
 application.properties
