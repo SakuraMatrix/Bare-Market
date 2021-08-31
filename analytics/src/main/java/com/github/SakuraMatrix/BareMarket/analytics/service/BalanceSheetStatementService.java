@@ -3,69 +3,59 @@ package com.github.SakuraMatrix.BareMarket.analytics.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.SakuraMatrix.BareMarket.analytics.domain.BalanceSheetStatement;
-import com.github.SakuraMatrix.BareMarket.analytics.domain.Pillar;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class BalanceSheetStatementService {
-    private ObjectMapper objectMapper;
-    @Value("${API_KEY}")
-    private String API_KEY;
-    private WebClient webClient;
+//    private ObjectMapper objectMapper;
+//    @Value("${API_KEY}")
+//    private String API_KEY;
 
-    public BalanceSheetStatementService(WebClient webClient){
-        this.objectMapper = new ObjectMapper();
-        this.webClient = webClient;
-    }
+    public BalanceSheetStatement parse(String jsonString){
+        BalanceSheetStatement balanceSheetStatement = new BalanceSheetStatement();
+        String toBeSplit = jsonString.substring(1, jsonString.length()-1); //Delete the curly brackets.
+        String[] split = toBeSplit.split(",");
 
-//    public Mono<String> bssCheck(String symbol) {
-//        return webClient.get()
-//                .uri("https://financialmodelingprep.com/api/v3/balance-sheet-statement/{symbol}?limit=1&apikey={API_KEY}", symbol, API_KEY)
-//                .retrieve()
-//                .bodyToMono(String.class);
-//    }
-
-    public Flux<BalanceSheetStatement> bssCheck(String symbol) {
-        String str =  webClient.get()
-                .uri("https://financialmodelingprep.com/api/v3/balance-sheet-statement/{symbol}?limit=5&apikey={API_KEY}", symbol, API_KEY)
-                .retrieve().bodyToMono(String.class).toString();
-                //.bodyToMono(String.class).toString();
-
-        System.out.println(str);
-        String toBeSplit = str.substring(3, str.length()-3); //Delete square brackets from beginning and end.
-
-        String[] dataSplit = toBeSplit.split("}, \\{"); //Split the 5 Json objects.
-
-        ArrayList<BalanceSheetStatement> bssList = new ArrayList<>();
-
-        for (String s : dataSplit) {
-            System.out.println("{" + s.trim() + "}");
-            bssList.add(deserialize("{" + s.trim() + "}")); //Use the trim method to handle possible empty spaces, and accommodate the lack of curly braces from the substring & splits.
+        for (int index = 0; index < split.length; index ++){
+            if (index == 0){
+                balanceSheetStatement.setDate(split[index].split("=")[1]);
+            }
+            if (index == 1){
+                balanceSheetStatement.setSymbol(split[index].split("=")[1]);
+            }
+            if (index == 29){
+                balanceSheetStatement.setLongTermDebt(Long.parseLong(split[index].split("=")[1]));
+            }
+            if (index == 41){
+                balanceSheetStatement.setTotalLiabilitiesAndStockholdersEquity(Long.parseLong(split[index].split("=")[1]));
+            }
+            if (index == 43){
+                balanceSheetStatement.setTotalDebt(Long.parseLong(split[index].split("=")[1]));
+            }
         }
 
-        return Flux.fromIterable(bssList); //Populate Flux with the contents of bssList
-    }
-
-
-    private BalanceSheetStatement deserialize(String string){
-        BalanceSheetStatement balanceSheetStatement;
-        try {
-            balanceSheetStatement = objectMapper.readValue(string, BalanceSheetStatement.class);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            balanceSheetStatement = null;
-        }
         return balanceSheetStatement;
     }
 
+    public List<BalanceSheetStatement> bssListCreation(List<BalanceSheetStatement> bssList){
+        for (int i = 0; i < bssList.size(); i++){
+            System.out.println("API's Response = "+bssList.get(i));
+//            System.out.println("This is concatenation = " + bssList.get(i));
+            bssList.set(i, this.parse(bssList.get(i) +""));
+
+            System.out.println("Symbol: " + bssList.get(i).getSymbol());
+            System.out.println("Date: " + bssList.get(i).getDate());
+            System.out.println("TotalLongTermDebt: " + bssList.get(i).getLongTermDebt());
+            System.out.println("TotalLiabilitiesAndStockholdersEquity: " + bssList.get(i).getTotalLiabilitiesAndStockholdersEquity());
+            System.out.println("TotalDebt: " + bssList.get(i).getTotalDebt());
+            System.out.println(" ");
+        }
+        return bssList;
+    }
 }

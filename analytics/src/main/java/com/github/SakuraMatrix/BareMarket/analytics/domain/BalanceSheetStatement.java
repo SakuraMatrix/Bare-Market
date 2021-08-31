@@ -2,8 +2,8 @@ package com.github.SakuraMatrix.BareMarket.analytics.domain;
 
 public class BalanceSheetStatement {
 
-    private String date;
-    private String Symbol;
+    private String date; //********************** 1
+    private String symbol; //********************** 2
     private String fillingDate;
     private String acceptedDate;
     private String period;
@@ -35,7 +35,7 @@ public class BalanceSheetStatement {
     private int deferredRevenue;
     private int otherCurrentLiabilities;
     private int totalCurrentLiabilities;
-    private int longTermDebt;
+    private long longTermDebt; //********************** 3
     private double deferredRevenueNonCurrent;
 
     private double deferredTaxLiabilitiesNonCurrent;
@@ -50,9 +50,9 @@ public class BalanceSheetStatement {
     private int othertotalStockholdersEquity;
     private int totalStockholdersEquity;
 
-    private int totalLiabilitiesAndStockholdersEquity;
+    private long totalLiabilitiesAndStockholdersEquity; //********************** 4
     private int totalInvestments;
-    private int totalDebt;
+    private long totalDebt; //********************** 5
     private int netDebt;
     private String link;
 
@@ -67,11 +67,11 @@ public class BalanceSheetStatement {
     }
 
     public String getSymbol() {
-        return Symbol;
+        return symbol;
     }
 
     public void setSymbol(String symbol) {
-        Symbol = symbol;
+        this.symbol = symbol;
     }
 
     public String getFillingDate() {
@@ -282,11 +282,11 @@ public class BalanceSheetStatement {
         this.totalCurrentLiabilities = totalCurrentLiabilities;
     }
 
-    public int getLongTermDebt() {
+    public long getLongTermDebt() {
         return longTermDebt;
     }
 
-    public void setLongTermDebt(int longTermDebt) {
+    public void setLongTermDebt(long longTermDebt) {
         this.longTermDebt = longTermDebt;
     }
 
@@ -378,11 +378,11 @@ public class BalanceSheetStatement {
         this.totalStockholdersEquity = totalStockholdersEquity;
     }
 
-    public int getTotalLiabilitiesAndStockholdersEquity() {
+    public long getTotalLiabilitiesAndStockholdersEquity() {
         return totalLiabilitiesAndStockholdersEquity;
     }
 
-    public void setTotalLiabilitiesAndStockholdersEquity(int totalLiabilitiesAndStockholdersEquity) {
+    public void setTotalLiabilitiesAndStockholdersEquity(long totalLiabilitiesAndStockholdersEquity) {
         this.totalLiabilitiesAndStockholdersEquity = totalLiabilitiesAndStockholdersEquity;
     }
 
@@ -394,11 +394,11 @@ public class BalanceSheetStatement {
         this.totalInvestments = totalInvestments;
     }
 
-    public int getTotalDebt() {
+    public long getTotalDebt() {
         return totalDebt;
     }
 
-    public void setTotalDebt(int totalDebt) {
+    public void setTotalDebt(long totalDebt) {
         this.totalDebt = totalDebt;
     }
 

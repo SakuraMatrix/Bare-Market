@@ -1,11 +1,14 @@
 package com.github.SakuraMatrix.BareMarket.analytics.domain;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 public class CompanyEnterpriseValue {
-    private String symbol;
-    private String date;
-    private double stockPrice;
-    private int numberOfShares;
-    private double marketCapitalization;
+    private String symbol; //*************** 1
+    private String date; //*************** 2
+    private double stockPrice; //*************** 3
+    private long numberOfShares;  //*************** 4
+    private BigDecimal marketCapitalization; //*************** 5
 
     private int minusCashAndCashEquivalents;
     private int addTotalDebt;
@@ -53,19 +56,19 @@ public class CompanyEnterpriseValue {
         this.stockPrice = stockPrice;
     }
 
-    public int getNumberOfShares() {
+    public long getNumberOfShares() {
         return numberOfShares;
     }
 
-    public void setNumberOfShares(int numberOfShares) {
+    public void setNumberOfShares(long numberOfShares) {
         this.numberOfShares = numberOfShares;
     }
 
-    public double getMarketCapitalization() {
+    public BigDecimal getMarketCapitalization() {
         return marketCapitalization;
     }
 
-    public void setMarketCapitalization(double marketCapitalization) {
+    public void setMarketCapitalization(BigDecimal marketCapitalization) {
         this.marketCapitalization = marketCapitalization;
     }
 

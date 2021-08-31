@@ -2,45 +2,54 @@ package com.github.SakuraMatrix.BareMarket.analytics.domain;
 
 public class IncomeStatement {
 
-    private String date;
-    private String symbol;
+    private String date; //******************* 1
+    private String symbol; //******************* 2
+    private String reportedCurrency;
     private String fillingDate;
     private String acceptedDate;
-    private String period;
 
-    private int revenue;
+    private String period;
+    private long revenue; //******************* 3
     private int costOfRevenue;
     private int grossProfit;
     private double grossProfitRatio;
-    private int researchAndDevelopmentExpenses;
 
+    private int researchAndDevelopmentExpenses;
     private int generalAndAdministrativeExpenses;
     private double sellingAndMarketingExpenses;
     private int otherExpenses;
     private int operatingExpenses;
-    private int costAndExpenses;
 
+    private int costAndExpenses;
     private int interestExpense;
     private int depreciationAndAmortization;
     private int ebitda;
     private double ebitdaratio;
-    private int operatingIncome;
 
+    private int operatingIncome;
     private double operatingIncomeRatio;
     private int totalOtherIncomeExpensesNet;
     private int incomeBeforeTax;
     private double incomeBeforeTaxRatio;
+
     private int incomeTaxExpense;
-
-    private int netIncome;
+    private long netIncome; //******************* 4
     private double netIncomeRatio;
-    private double eps;
+    private double eps; //******************* 5
     private double epsdiluted;
-    private int weightedAverageShsOut;
 
+    private int weightedAverageShsOut;
     private int weightedAverageShsOutDil;
     private String link;
     private String finalLink;
+
+    public String getReportedCurrency() {
+        return reportedCurrency;
+    }
+
+    public void setReportedCurrency(String reportedCurrency) {
+        this.reportedCurrency = reportedCurrency;
+    }
 
     public String getDate() {
         return date;
@@ -82,11 +91,11 @@ public class IncomeStatement {
         this.period = period;
     }
 
-    public int getRevenue() {
+    public long getRevenue() {
         return revenue;
     }
 
-    public void setRevenue(int revenue) {
+    public void setRevenue(long revenue) {
         this.revenue = revenue;
     }
 
@@ -242,11 +251,11 @@ public class IncomeStatement {
         this.incomeTaxExpense = incomeTaxExpense;
     }
 
-    public int getNetIncome() {
+    public long getNetIncome() {
         return netIncome;
     }
 
-    public void setNetIncome(int netIncome) {
+    public void setNetIncome(long netIncome) {
         this.netIncome = netIncome;
     }
 
@@ -262,9 +271,7 @@ public class IncomeStatement {
         return eps;
     }
 
-    public void setEps(double eps) {
-        this.eps = eps;
-    }
+    public void setEps(double eps) {this.eps = eps;}
 
     public double getEpsdiluted() {
         return epsdiluted;

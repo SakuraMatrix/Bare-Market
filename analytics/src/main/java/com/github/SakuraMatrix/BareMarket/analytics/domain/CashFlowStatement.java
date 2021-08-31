@@ -2,49 +2,67 @@ package com.github.SakuraMatrix.BareMarket.analytics.domain;
 
 public class CashFlowStatement {
 
-    private String symbol;
+    private String date; //************ 1
+    private String symbol; //************ 2
+    private String reportedCurrency;
     private String fillingDate;
     private String acceptedDate;
+
     private String period;
     private String netIncome;
-
     private int depreciationAndAmortization;
     private int deferredIncomeTax;
     private int stockBasedCompensation;
+
     private int changeInWorkingCapital;
     private int accountsReceivables;
-
     private int inventory;
     private int accountsPayables;
     private int otherWorkingCapital;
+
     private int otherNonCashItems;
     private int netCashProvidedByOperatingActivities;
-
     private int investmentsInPropertyPlantAndEquipment;
     private int acquisitionsNet;
     private int purchasesOfInvestments;
+
     private int salesMaturitiesOfInvestments;
     private int otherInvestingActivites;
-
     private int netCashUsedForInvestingActivites;
     private int debtRepayment;
     private int commonStockIssued;
+
     private int commonStockRepurchased;
     private int dividendsPaid;
-
     private int otherFinancingActivites;
     private int netCashUsedProvidedByFinancingActivities;
     private int effectOfForexChangesOnCash;
+
     private int netChangeInCash;
     private int cashAtEndOfPeriod;
-
     private int cashAtBeginningOfPeriod;
     private int operatingCashFlow;
     private int capitalExpenditure;
-    private int freeCashFlow;
-    private String link;
 
+    private long freeCashFlow; //************ 3
+    private String link;
     private String finalLink;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getReportedCurrency() {
+        return reportedCurrency;
+    }
+
+    public void setReportedCurrency(String reportedCurrency) {
+        this.reportedCurrency = reportedCurrency;
+    }
 
     public String getSymbol() {
         return symbol;
@@ -310,11 +328,11 @@ public class CashFlowStatement {
         this.capitalExpenditure = capitalExpenditure;
     }
 
-    public int getFreeCashFlow() {
+    public long getFreeCashFlow() {
         return freeCashFlow;
     }
 
-    public void setFreeCashFlow(int freeCashFlow) {
+    public void setFreeCashFlow(long freeCashFlow) {
         this.freeCashFlow = freeCashFlow;
     }
 
