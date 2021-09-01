@@ -27,14 +27,14 @@ public class StockLookupService {
             .uri("https://financialmodelingprep.com/api/v3/quote/{symbol}?apikey={API_KEY}", symbol, API_KEY)
             .retrieve()
             .bodyToMono(String.class)
+            .map(s -> s.substring(2, s.length() - 2))
             .map(this::deserialize);
     }
 
     private StockInfo deserialize(String string) {
         StockInfo stockInfo;
-        String stockString = string.substring(2, string.length() - 2);
         try {
-            stockInfo = objectMapper.readValue(stockString, StockInfo.class);
+            stockInfo = objectMapper.readValue(string, StockInfo.class);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             stockInfo = null;
