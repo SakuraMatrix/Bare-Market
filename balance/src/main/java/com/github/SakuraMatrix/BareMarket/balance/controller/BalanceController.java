@@ -27,7 +27,7 @@ public class BalanceController {
     } // GET request with curl: curl localhost:8080/balances
 
     @PutMapping()
-    public Mono<Balance> setBalance(@RequestBody double balance) {
+    public Mono<Balance> setBalance(@RequestBody double balance) throws Exception {
         return balanceService.set(balance);
     } // PUT request with curl: curl -X PUT -H "Content-Type: application/json" -d "1" localhost:8080/balances
 }
