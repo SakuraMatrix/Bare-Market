@@ -1,4 +1,4 @@
-package com.github.SakuraMatrix.BareMarket.userservice.domain;
+package com.github.SakuraMatrix.BareMarket.usergateway.domain;
 
 public class Watchlist {
     private int id;
