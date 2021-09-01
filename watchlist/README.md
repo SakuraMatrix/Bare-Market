@@ -4,7 +4,7 @@ A service to hold a list of favorite stocks to watch.
 ## Table Structure
 | id    | symbol  |
 | ----- | ------- |
-| (int) | (text)) |
+| (int) | (text) |
 
 ## Endpoints
 - GET `/watchlists`
