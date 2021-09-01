@@ -33,7 +33,7 @@ public class WatchlistController {
         return watchlistService.add(symbol);
     } // POST request with curl: curl -X POST -H "Content-Type: application/json" -d "GOOGL" localhost:8080/watchlists
 
-    // Not supported by AWS Keyspaces
+    // // Not supported by AWS Keyspaces
     // @DeleteMapping()
     // public void deleteAll() {
     //     watchlistService.deleteAll();

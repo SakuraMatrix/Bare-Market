@@ -25,7 +25,7 @@ public class WatchlistService {
         return watchlistRepository.save(new Watchlist(new WatchlistKey(1, symbol)));
     }
 
-    // Not supported by AWS Keyspaces
+    // // Not supported by AWS Keyspaces
     // public void deleteAll() { 
     //     watchlistRepository.deleteAll().subscribe();
     // }
