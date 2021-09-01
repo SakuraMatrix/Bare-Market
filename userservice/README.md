@@ -1,3 +1,3 @@
 # User Service
 
-This service will handle the 'user interface' (i.e. balance and options available to the user)
+This service is the 'entry point' the user will access to make requests to other services.

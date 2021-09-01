@@ -1,3 +1,5 @@
+.factorypath
+
 # Maven
 .mvn/
 target/
@@ -6,6 +8,9 @@ target/
 .settings/
 .classpath
 .project
+
+# Intellij
+.idea/
 
 # Includes AWS credentials and API keys
 application.properties
