@@ -22,5 +22,5 @@ public class StockLookupController {
     @GetMapping("/{symbol}")
     public Mono<StockInfo> search(@PathVariable String symbol) {
         return stockLookupService.search(symbol);
-    } // GET request with curl: curl localhost:8080/GOOGL
+    }
 }

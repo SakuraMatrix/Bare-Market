@@ -17,8 +17,8 @@ public class StockService {
         return stockRepository.findAll();
     }
 
-    public Mono<Stock>add(String symbol, long timestamp, String name, double price) {
-        return stockRepository.save(new Stock(new StockKey(1, symbol, timestamp), name, price));
+    public Mono<Stock>add(StockInfo stockInfo) {
+        return stockRepository.save(new Stock(new StockKey(1, stockInfo.getSymbol(), stockInfo.getTimestamp()), stockInfo.getName(), stockInfo.getPrice()));
     }
 
     public void delete(String symbol, long timestamp) {

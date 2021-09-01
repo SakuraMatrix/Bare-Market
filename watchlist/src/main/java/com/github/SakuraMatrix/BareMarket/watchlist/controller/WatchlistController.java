@@ -26,12 +26,12 @@ public class WatchlistController {
     @GetMapping()
     public Flux<Watchlist> getAll() {
         return watchlistService.getAll();
-    } // GET request with curl: curl localhost:8080/watchlists
+    }
 
     @PostMapping()
     public Mono<Watchlist> add(@RequestBody String symbol) {
         return watchlistService.add(symbol);
-    } // POST request with curl: curl -X POST -H "Content-Type: application/json" -d "GOOGL" localhost:8080/watchlists
+    }
 
     // // Not supported by AWS Keyspaces
     // @DeleteMapping()
@@ -42,5 +42,5 @@ public class WatchlistController {
     @DeleteMapping("/{symbol}")
     public void delete(@PathVariable String symbol) {
         watchlistService.delete(symbol);
-    } // DELETE request with curl: curl -X DELETE localhost:8080/watchlists/GOOGL
+    }
 }

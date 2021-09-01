@@ -21,8 +21,8 @@ public class StockController {
     }// GET request with curl: curl localhost:8080/stocks
 
     @PostMapping()
-    public Mono<Stock>add(@RequestBody Stock stock){
-        return stockService.add(stock.getSymbol(), stock.getTimestamp(), stock.getName(), stock.getPrice());
+    public Mono<Stock>add(@RequestBody StockInfo stockInfo){
+        return stockService.add(stockInfo);
     }
 
     @DeleteMapping("/{symbol}/{timestamp}")
