@@ -43,6 +43,12 @@ public class CompanyEnterpriseValueService {
     }
 
     public List<CompanyEnterpriseValue> cevListCreation(List<CompanyEnterpriseValue> cevList){
+        System.out.println("==================================");
+        System.out.println("cevList size: " + cevList.size());
+        System.out.println("cevList isEmpty?: " + cevList.isEmpty());
+        System.out.println("cevList content: " + cevList);
+        System.out.println("==================================");
+
         for (int i = 0; i < cevList.size(); i++){
             System.out.println("API's Response = "+cevList.get(i));
 //            System.out.println("This is concatenation = " + bssList.get(i));
@@ -58,28 +64,28 @@ public class CompanyEnterpriseValueService {
         return cevList;
     }
 
-    public BigDecimal pillar1(List<CompanyEnterpriseValue> cevList) {
-        BigDecimal marketCapitalizationAverage = new BigDecimal(0);
-
-        ArrayList<BigDecimal> Yearly = new ArrayList<BigDecimal>();
-
-        for(CompanyEnterpriseValue element : cevList) {
-            marketCapitalizationAverage = marketCapitalizationAverage.add(element.getMarketCapitalization());
-            Yearly.add(marketCapitalizationAverage);
-        }
-
-        for(int i = 0; i < cevList.size(); i++) {
-
-            System.out.println("Date: " + cevList.get(i).getDate());
-            System.out.println("MarketCapitalization: " + cevList.get(i).getMarketCapitalization());
-            System.out.println(" " );
-        }
-
-        System.out.println("5 Years sum of MarketCapitalization: " + marketCapitalizationAverage);
-        marketCapitalizationAverage = marketCapitalizationAverage.divide(new BigDecimal(cevList.size()));
-        System.out.println("MarketCapitalizationAverage: " + marketCapitalizationAverage);
-
-
-        return marketCapitalizationAverage;
-    }
+//    public BigDecimal pillar1(List<CompanyEnterpriseValue> cevList) {
+//        BigDecimal marketCapitalizationAverage = new BigDecimal(0);
+//
+//        ArrayList<BigDecimal> Yearly = new ArrayList<BigDecimal>();
+//
+//        for(CompanyEnterpriseValue element : cevList) {
+//            marketCapitalizationAverage = marketCapitalizationAverage.add(element.getMarketCapitalization());
+//            Yearly.add(marketCapitalizationAverage);
+//        }
+//
+//        for(int i = 0; i < cevList.size(); i++) {
+//
+//            System.out.println("Date: " + cevList.get(i).getDate());
+//            System.out.println("MarketCapitalization: " + cevList.get(i).getMarketCapitalization());
+//            System.out.println(" " );
+//        }
+//
+//        System.out.println("5 Years sum of MarketCapitalization: " + marketCapitalizationAverage);
+//        marketCapitalizationAverage = marketCapitalizationAverage.divide(new BigDecimal(cevList.size()));
+//        System.out.println("MarketCapitalizationAverage: " + marketCapitalizationAverage);
+//
+//
+//        return marketCapitalizationAverage;
+//    }
 }

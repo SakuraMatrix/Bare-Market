@@ -46,33 +46,33 @@ public class CashFlowStatementService {
 
     }
 
-    public BigDecimal pillar2(  List<CashFlowStatement> cfsList, BalanceSheetStatement bss){
-        BigDecimal fcfAverage = BigDecimal.valueOf(0);
-        BigDecimal result;
-        BigDecimal divisor = BigDecimal.valueOf(bss.getTotalLiabilitiesAndStockholdersEquity());
-
-        for (int i = 0; i < cfsList.size(); i++){
-//            System.out.println("Symbol: " + cfsList.get(i).getSymbol());
-//            System.out.println("Date: " + cfsList.get(i).getDate());
-//            System.out.println("FreeCashFlow: " + cfsList.get(i).getFreeCashFlow());
-            fcfAverage = fcfAverage.add(BigDecimal.valueOf(cfsList.get(i).getFreeCashFlow()));
-        }
-
-        System.out.println("Sum FreeCashFlow: " + fcfAverage) ;
-
-        result = fcfAverage.divide(BigDecimal.valueOf(cfsList.size()));
-        System.out.println("Average FreeCashFlow: " + result);
-
-        result = result.divide(divisor, 2, RoundingMode.HALF_UP);
-        System.out.println("TotalLiabilitiesAndStockholdersEquity: " + divisor);
-        System.out.println(fcfAverage + " / " + divisor + " = " + result);
-
-//        result = fcfAverage.divide(BigDecimal.valueOf(bss.getTotalLiabilitiesAndStockholdersEquity()));
-
-//        System.out.println("Average FreeCashFlow: " + fcfAverage.divide(BigDecimal.valueOf(bss.getTotalLiabilitiesAndStockholdersEquity()))) ;
-//        System.out.println("Average FreeCashFlow: " +  BigDecimal.valueOf(bss.getTotalLiabilitiesAndStockholdersEquity()).divide(fcfAverage));
-
-        return result;
-    }
+//    public BigDecimal pillar2(  List<CashFlowStatement> cfsList, BalanceSheetStatement bss){
+//        BigDecimal fcfAverage = BigDecimal.valueOf(0);
+//        BigDecimal result;
+//        BigDecimal divisor = BigDecimal.valueOf(bss.getTotalLiabilitiesAndStockholdersEquity());
+//
+//        for (int i = 0; i < cfsList.size(); i++){
+////            System.out.println("Symbol: " + cfsList.get(i).getSymbol());
+////            System.out.println("Date: " + cfsList.get(i).getDate());
+////            System.out.println("FreeCashFlow: " + cfsList.get(i).getFreeCashFlow());
+//            fcfAverage = fcfAverage.add(BigDecimal.valueOf(cfsList.get(i).getFreeCashFlow()));
+//        }
+//
+//        System.out.println("Sum FreeCashFlow: " + fcfAverage) ;
+//
+//        result = fcfAverage.divide(BigDecimal.valueOf(cfsList.size()));
+//        System.out.println("Average FreeCashFlow: " + result);
+//
+//        result = result.divide(divisor, 2, RoundingMode.HALF_UP);
+//        System.out.println("TotalLiabilitiesAndStockholdersEquity: " + divisor);
+//        System.out.println(fcfAverage + " / " + divisor + " = " + result);
+//
+////        result = fcfAverage.divide(BigDecimal.valueOf(bss.getTotalLiabilitiesAndStockholdersEquity()));
+//
+////        System.out.println("Average FreeCashFlow: " + fcfAverage.divide(BigDecimal.valueOf(bss.getTotalLiabilitiesAndStockholdersEquity()))) ;
+////        System.out.println("Average FreeCashFlow: " +  BigDecimal.valueOf(bss.getTotalLiabilitiesAndStockholdersEquity()).divide(fcfAverage));
+//
+//        return result;
+//    }
 
 }
