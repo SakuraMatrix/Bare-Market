@@ -48,6 +48,8 @@ public class PillarService {
     }
 
     public String pillar1(List<IncomeStatement> isList, List<CompanyEnterpriseValue> cevList, List<Quote> quoteList){
+        String listedInfo = "";
+        String info = "[" + "Most Recent <-> " + "Price: " + quoteList.get(0).getPrice() + " / " + "EPS: "+ quoteList.get(0).getEps() + " = " + "PE: " + quoteList.get(0).getPe() + "] \n";
         if (cevList.size() == 1){ //Checks for cevList being at least greater than 1 to proceed, or else stops analyzing the company due to being too young.
             return "Company too young to analyze using pillar 1";
         }
@@ -66,7 +68,11 @@ public class PillarService {
             }
             sumOfPe.add( stockPrice / eps ); //This will be doing the calculations for StockPrice / eps ; and store it into an arrayList.
             System.out.println("pe being stored: " + sumOfPe.get(i));
+
+            listedInfo += "[" + isList.get(i).getDate() + " <--> " + "Price: " + cevList.get(i).getStockPrice() + " / " + "EPS: " + isList.get(i).getEps() + " = " + "PE:"+(cevList.get(i).getStockPrice()/isList.get(i).getEps() + "] \n");
         }
+
+        info += listedInfo;
 
         sumOfPe.add(quoteList.get(0).getPe());
 
@@ -78,7 +84,7 @@ public class PillarService {
 
         System.out.print("Average of current PE along with the past " + (isList.size()-1) + " PEs: " + averageOfPe);
 
-        return "Pillar One[5YR PE] calculated: " + averageOfPe + " =< 22.5";
+        return "Pillar One[5YR PE] calculated: " + averageOfPe + " =< 22.5 \n" + info;
     }
 
     public String pillar2(List<CashFlowStatement> cfsList, BalanceSheetStatement bss){

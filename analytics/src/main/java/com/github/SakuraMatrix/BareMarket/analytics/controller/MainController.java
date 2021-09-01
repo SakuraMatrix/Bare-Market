@@ -46,7 +46,7 @@ public class MainController {
     @ResponseBody
 //    public String main(final Model model) {
     public String index(@PathVariable String symbol) {
-        String newURL = JSON_BSS_URL+ symbol + "?limit=5&apikey="+API_KEY;
+        String newURL = JSON_BSS_URL + symbol + "?limit=5&apikey=" + API_KEY;
         List<BalanceSheetStatement> bssList = (List<BalanceSheetStatement>) parsingService.parse(newURL); // the given json returns a list of BSS.
         balanceSheetStatementService.bssListCreation(bssList);
 
@@ -57,7 +57,7 @@ public class MainController {
     @ResponseBody
 //    public String main(final Model model) {
     public String index2(@PathVariable String symbol) {
-        String newURL = JSON_CEV_URL+ symbol + "?limit=5&apikey="+API_KEY;
+        String newURL = JSON_CEV_URL + symbol + "?limit=5&apikey=" + API_KEY;
         List<CompanyEnterpriseValue> cevList = (List<CompanyEnterpriseValue>) parsingService.parse(newURL); // the given json returns a list of BSS.
         companyEnterpriseValueService.cevListCreation(cevList);
 
@@ -66,68 +66,28 @@ public class MainController {
 
     @GetMapping("/pillar-all/{symbol}")
     @ResponseBody
-    public String allPillars(@PathVariable String symbol){
-        String newURL = JSON_BSS_URL+symbol + "?limit=1&apikey="+API_KEY; //Used for 1st API call.
-        String newURL2 = JSON_CFS_URL+ symbol + "?limit=5&apikey="+API_KEY; //Used for 2nd API call.
-        String newURL3 = JSON_CEV_URL+ symbol + "?limit=5&apikey="+API_KEY; //Used for 3rd API call.
-        String newURL4 = JSON_IS_URL+ symbol + "?limit=5&apikey="+API_KEY; //Used for 4th API call.
-        String newURL5 = JSON_QUOTE_URL+ symbol + "?limit=1&apikey="+API_KEY; //Used for 5th API call.
+    public void allPillars(@PathVariable String symbol){
 
-        List<BalanceSheetStatement> bssList = (List<BalanceSheetStatement>) parsingService.parse(newURL); // returns a json list of CFS.
-        List<CashFlowStatement> cfsList = (List<CashFlowStatement>) parsingService.parse(newURL2); // returns a json list of CFS.
-        List<CompanyEnterpriseValue> cevList = (List<CompanyEnterpriseValue>) parsingService.parse(newURL3); // returns a json list of CEV.
-        List<IncomeStatement> isList = (List<IncomeStatement>) parsingService.parse(newURL4); // returns a json list of IS.
-        List<Quote> quoteList = (List<Quote>) parsingService.parse(newURL5);
-        pillarService = new PillarService(bssList,cfsList,cevList,isList,quoteList);
-
-        return pillarService.allPillars();
+        pillarService.allPillars();
     }
 
-//    @GetMapping("/pillar-1/{symbol}")
+//    @GetMapping("/pillar-all/{symbol}")
 //    @ResponseBody
-////    public String main(final Model model) {
-//    public String pillarOne(@PathVariable String symbol) {
-//        String newURL = JSON_IS_URL+ symbol + "?limit=5&apikey="+API_KEY; //Used for Pillar1's API call one.
-//        String newURL2 = JSON_CEV_URL+ symbol + "?limit=5&apikey="+API_KEY; //Used for Pillar2's API call two.
+//    public String allPillars(@PathVariable String symbol){
+//        String newURL = JSON_BSS_URL+symbol + "?limit=1&apikey="+API_KEY; //Used for 1st API call.
+//        String newURL2 = JSON_CFS_URL+ symbol + "?limit=5&apikey="+API_KEY; //Used for 2nd API call.
+//        String newURL3 = JSON_CEV_URL+ symbol + "?limit=5&apikey="+API_KEY; //Used for 3rd API call.
+//        String newURL4 = JSON_IS_URL+ symbol + "?limit=5&apikey="+API_KEY; //Used for 4th API call.
+//        String newURL5 = JSON_QUOTE_URL+ symbol + "?limit=1&apikey="+API_KEY; //Used for 5th API call.
 //
-//        List<CompanyEnterpriseValue> cevList = (List<CompanyEnterpriseValue>) parsingService.parse(newURL2); // returns a json list of CEV.
-//        cevList = companyEnterpriseValueService.cevListCreation(cevList); //Properly parse the json to get only wanted values for each element in the list of the json object.
-//        List<IncomeStatement> isList = (List<IncomeStatement>) parsingService.parse(newURL); // returns a json list of IS.
+//        List<BalanceSheetStatement> bssList = (List<BalanceSheetStatement>) parsingService.parse(newURL); // returns a json list of CFS.
+//        List<CashFlowStatement> cfsList = (List<CashFlowStatement>) parsingService.parse(newURL2); // returns a json list of CFS.
+//        List<CompanyEnterpriseValue> cevList = (List<CompanyEnterpriseValue>) parsingService.parse(newURL3); // returns a json list of CEV.
+//        List<IncomeStatement> isList = (List<IncomeStatement>) parsingService.parse(newURL4); // returns a json list of IS.
+//        List<Quote> quoteList = (List<Quote>) parsingService.parse(newURL5);
+//        pillarService = new PillarService(bssList,cfsList,cevList,isList,quoteList);
 //
-//        double result = incomeStatementService.pillar1(incomeStatementService.isListCreation(isList),cevList); // IncomeStatementService.java will have the calculations of the first pillar in its method.
-//        if (result == -11.11){
-//            return "Company too young to analyze using pillar 1";
-//        }
-//        return "Pillar One[5YR PE] calculated: " + result + " =< 22.5";
+//        return pillarService.allPillars();
 //    }
-//    @GetMapping("/pillar-2/{symbol}")
-//    @ResponseBody
-////    public String main(final Model model) {
-//    public String pillarTwo(@PathVariable String symbol) {
-//        String newURL = JSON_CFS_URL+ symbol + "?limit=5&apikey="+API_KEY; //Used for Pillar2's 1st API call.
-//        String newURL2 = JSON_BSS_URL+symbol + "?limit=1&apikey="+API_KEY; //Used for Pillar2's 2nd API call.
-//
-//        List<BalanceSheetStatement> bssList = (List<BalanceSheetStatement>) parsingService.parse(newURL2);
-//        BalanceSheetStatement bss = balanceSheetStatementService.bssListCreation(bssList).get(0);
-//
-//        List<CashFlowStatement> cfsList = (List<CashFlowStatement>) parsingService.parse(newURL); // returns a json list of CFS.
-//
-//        BigDecimal result = cashFlowStatementService.pillar2(cashFlowStatementService.cfsListCreation(cfsList),bss);
-//
-//
-//
-//        return "Pillar Two[5YRE ROIC] calculated: " + result + " => 0.9%";
-//    }
-//
-//    @GetMapping("/pillar-3/{symbol}")
-//    @ResponseBody
-////    public String main(final Model model) {
-//    public String pillarThree(@PathVariable String symbol) {
-//        String newURL = JSON_IS_URL+ symbol + "?limit=5&apikey="+API_KEY; //Used for Pillar1's API call one.
-//
-//        List<IncomeStatement> isList = (List<IncomeStatement>) parsingService.parse(newURL); // returns a json list of IS.
-//
-//        String result = incomeStatementService.pillar3(incomeStatementService.isListCreation(isList)); // IncomeStatementService.java will have the calculations of the first pillar in its method.
-//        return "Pillar Three[5YR Revenue Growth]: \n" + result;
-//    }
+
 }
