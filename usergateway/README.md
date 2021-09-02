@@ -12,3 +12,13 @@ Additionally, this service comprises the additional handling of the logic betwee
 - `curl localhost:8080/summary`
 - `curl -X POST -H 'Content-Type: application/json' -d '{ "symbol": "GOOGL" }' localhost:8080/holdings`
 - `curl -X DELETE localhost:8080/holdings/GOOGL/1`
+
+## Run Karate tests
+```
+$ mvn test -Dtest=GatewayRunner
+```
+
+## Run application
+```
+$ mvn spring-boot:run
+```
