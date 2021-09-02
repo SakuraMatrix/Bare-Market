@@ -1,22 +1,11 @@
 package com.github.SakuraMatrix.BareMarket.analytics.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.SakuraMatrix.BareMarket.analytics.domain.BalanceSheetStatement;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Flux;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class BalanceSheetStatementService {
-//    private ObjectMapper objectMapper;
-//    @Value("${API_KEY}")
-//    private String API_KEY;
-
     public BalanceSheetStatement parse(String jsonString){
         BalanceSheetStatement balanceSheetStatement = new BalanceSheetStatement();
         String toBeSplit = jsonString.substring(1, jsonString.length()-1); //Delete the curly brackets.
@@ -45,16 +34,16 @@ public class BalanceSheetStatementService {
 
     public List<BalanceSheetStatement> bssListCreation(List<BalanceSheetStatement> bssList){
         for (int i = 0; i < bssList.size(); i++){
-            System.out.println("API's Response = "+bssList.get(i));
+//            System.out.println("API's Response = "+bssList.get(i));
 //            System.out.println("This is concatenation = " + bssList.get(i));
             bssList.set(i, this.parse(bssList.get(i) +""));
 
-            System.out.println("Symbol: " + bssList.get(i).getSymbol());
-            System.out.println("Date: " + bssList.get(i).getDate());
-            System.out.println("TotalLongTermDebt: " + bssList.get(i).getLongTermDebt());
-            System.out.println("TotalLiabilitiesAndStockholdersEquity: " + bssList.get(i).getTotalLiabilitiesAndStockholdersEquity());
-            System.out.println("TotalDebt: " + bssList.get(i).getTotalDebt());
-            System.out.println(" ");
+//            System.out.println("Symbol: " + bssList.get(i).getSymbol());
+//            System.out.println("Date: " + bssList.get(i).getDate());
+//            System.out.println("TotalLongTermDebt: " + bssList.get(i).getLongTermDebt());
+//            System.out.println("TotalLiabilitiesAndStockholdersEquity: " + bssList.get(i).getTotalLiabilitiesAndStockholdersEquity());
+//            System.out.println("TotalDebt: " + bssList.get(i).getTotalDebt());
+//            System.out.println(" ");
         }
         return bssList;
     }

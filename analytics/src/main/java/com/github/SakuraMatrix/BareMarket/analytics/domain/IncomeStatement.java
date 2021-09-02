@@ -33,7 +33,7 @@ public class IncomeStatement {
     private double incomeBeforeTaxRatio;
 
     private int incomeTaxExpense;
-    private long netIncome; //******************* 4
+    private double netIncome; //******************* 4
     private double netIncomeRatio;
     private double eps; //******************* 5
     private double epsdiluted;
@@ -251,11 +251,11 @@ public class IncomeStatement {
         this.incomeTaxExpense = incomeTaxExpense;
     }
 
-    public long getNetIncome() {
+    public double getNetIncome() {
         return netIncome;
     }
 
-    public void setNetIncome(long netIncome) {
+    public void setNetIncome(double netIncome) {
         this.netIncome = netIncome;
     }
 
