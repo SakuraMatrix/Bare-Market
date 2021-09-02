@@ -19,10 +19,10 @@ public class BalanceService {
         return balanceRepository.findById(1);
     }
 
-    public Mono<Balance> set(double balance) throws Exception {
-        if (balance < 0) {
+    public Mono<Balance> set(Balance balance) throws Exception {
+        if (balance.getBalance() < 0) {
             throw new Exception("Balance cannot be negative");
         }
-        return balanceRepository.save(new Balance(1, balance));
+        return balanceRepository.save(balance);
     }
 }

@@ -27,7 +27,7 @@ public class BalanceController {
     }
 
     @PutMapping()
-    public Mono<Balance> setBalance(@RequestBody double balance) throws Exception {
+    public Mono<Balance> setBalance(@RequestBody Balance balance) throws Exception {
         return balanceService.set(balance);
     }
 }
