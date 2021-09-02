@@ -6,25 +6,33 @@ import org.springframework.data.cassandra.core.mapping.Table;
 @Table("watchlists")
 public class Watchlist {
     @PrimaryKey
-    private WatchlistKey key;
+    private WatchlistKey watchlistKey;
 
-    public Watchlist (WatchlistKey key) {
-        this.key = key;
+    public Watchlist() {
+
+    }
+
+    public Watchlist (WatchlistKey watchlistKey) {
+        this.watchlistKey = watchlistKey;
     }
 
     public int getId() {
-        return key.getId();
+        return watchlistKey.getId();
     }
 
     public String getSymbol() {
-        return key.getSymbol();
+        return watchlistKey.getSymbol();
     }
 
     public void setId(int id) {
-        this.key.setId(id);
+        this.watchlistKey.setId(id);
     }
 
     public void setSymbol(String symbol) {
-        this.key.setSymbol(symbol);
+        this.watchlistKey.setSymbol(symbol);
+    }
+
+    public void setWatchlistKey(WatchlistKey watchlistKey) {
+        this.watchlistKey = watchlistKey;
     }
 }

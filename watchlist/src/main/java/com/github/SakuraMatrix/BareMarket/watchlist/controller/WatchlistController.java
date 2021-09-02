@@ -29,8 +29,8 @@ public class WatchlistController {
     }
 
     @PostMapping()
-    public Mono<Watchlist> add(@RequestBody String symbol) {
-        return watchlistService.add(symbol);
+    public Mono<Watchlist> add(@RequestBody Watchlist watchlist) {
+        return watchlistService.add(watchlist);
     }
 
     // // Not supported by AWS Keyspaces

@@ -21,8 +21,8 @@ public class WatchlistService {
         return watchlistRepository.findAll();
     }
 
-    public Mono<Watchlist> add(String symbol) {
-        return watchlistRepository.save(new Watchlist(new WatchlistKey(1, symbol)));
+    public Mono<Watchlist> add(Watchlist watchlist) {
+        return watchlistRepository.save(watchlist);
     }
 
     // // Not supported by AWS Keyspaces
