@@ -28,8 +28,8 @@ public class UserController {
     }
 
     @PostMapping("/holdings")
-    public Mono<Stock> buy(@RequestBody String symbol) {
-        return userService.buy(symbol);
+    public Mono<Stock> buy(@RequestBody StockInfo stockInfo) {
+        return userService.buy(stockInfo);
     }
 
     @DeleteMapping("/holdings/{symbol}/{timestamp}")

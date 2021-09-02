@@ -10,5 +10,5 @@ Additionally, this service comprises the additional handling of the logic betwee
 
 ## Example requests
 - `curl localhost:8080/summary`
-- `curl -X POST -H "Content-Type: application/json" -d "GOOGL" localhost:8080/holdings`
+- `curl -X POST -H 'Content-Type: application/json' -d '{ "symbol": "GOOGL" }' localhost:8080/holdings`
 - `curl -X DELETE localhost:8080/holdings/GOOGL/1`

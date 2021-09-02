@@ -24,17 +24,17 @@ public class UserService {
         return getWatchlist().flatMap(stock ->  Flux.merge(searchStock(stock.getSymbol())));
     }
 
-    public Mono<Stock> buy(String symbol) {
-        Mono<StockInfo> stockInfo = searchStock(symbol);
+    public Mono<Stock> buy(StockInfo stockInfo) {
+        Mono<StockInfo> info = searchStock(stockInfo.getSymbol());
 
-        stockInfo.subscribe(info -> 
+        info.subscribe(i -> 
             getBalance().subscribe(balance -> 
-                adjustBalance(balance.getBalance(), info.getPrice(), true)
-                    .subscribe(response -> insertIntoDB(info).subscribe())
+                adjustBalance(balance.getBalance(), i.getPrice(), true)
+                    .subscribe(response -> insertIntoDB(i).subscribe())
             )
         );
 
-        return stockInfo.map(info -> new Stock(new StockKey(1, info.getSymbol(), info.getTimestamp()), info.getName(), info.getPrice()));
+        return info.map(i -> new Stock(new StockKey(1, i.getSymbol(), i.getTimestamp()), i.getName(), i.getPrice()));
     }
 
     public Mono<Stock> sell(String symbol, long timestamp) {
@@ -76,7 +76,7 @@ public class UserService {
         double newBalance = buy ? balance - amount : balance + amount;
         return webClient.put()
             .uri("localhost:8080/balances")
-            .body(Mono.just(newBalance), Double.class)
+            .body(Mono.just(new Balance(1, newBalance)), Balance.class)
             .retrieve()
             .bodyToMono(Balance.class);
     }
