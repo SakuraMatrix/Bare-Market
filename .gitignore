@@ -1,2 +1,16 @@
-# Maven target directory
+.factorypath
+
+# Maven
+.mvn/
 target/
+
+# Eclipse settings
+.settings/
+.classpath
+.project
+
+# Intellij
+.idea/
+
+# Includes AWS credentials and API keys
+application.properties
