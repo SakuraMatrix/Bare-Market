@@ -1,6 +1,5 @@
 package com.github.SakuraMatrix.BareMarket.analytics.service;
 
-import com.github.SakuraMatrix.BareMarket.analytics.domain.CashFlowStatement;
 import com.github.SakuraMatrix.BareMarket.analytics.domain.Quote;
 import org.springframework.stereotype.Service;
 
@@ -11,24 +10,26 @@ public class QuoteService {
     public Quote parse(String jsonString){
         Quote quote = new Quote();
         String toBeSplit = jsonString.substring(1, jsonString.length()-1); //Delete the curly brackets.
-        String[] split = toBeSplit.split(",");
+        String[] splitList = toBeSplit.split(",");
 
-        for (int index = 0; index < split.length; index ++){
+        for (int index = 0; index < splitList.length; index ++){
             if (index == 0){
-                quote.setSymbol(split[index].split("=")[1]);
+                //System.out.println("Checking Data: " + splitList[index].split("="));
+                quote.setSymbol(splitList[index].split("=")[1]);
             }
             if (index == 2){
-                quote.setPrice(Double.parseDouble(split[index].split("=")[1]));
+//                System.out.println("Checking DataHere: " + splitList[index].split("=")[1]);
+                quote.setPrice(Double.parseDouble(splitList[index].split("=")[1]));
             }
             if (index == 17){
-                quote.setEps(Double.parseDouble(split[index].split("=")[1]));
+                quote.setEps(Double.parseDouble(splitList[index].split("=")[1]));
             }
             if (index == 18){
-                System.out.println("BUG FLAG: " + split[index].split("=")[1] );
-                if (split[index].split("=")[1].contains("null")){
+//                System.out.println("BUG FLAG: " + split[index].split("=")[1] );
+                if (splitList[index].split("=")[1].contains("null")){
                     quote.setPe(-11.11);
                 }
-                else {quote.setPe(Double.parseDouble(split[index].split("=")[1]));}
+                else {quote.setPe(Double.parseDouble(splitList[index].split("=")[1]));}
             }
         }
 
@@ -37,15 +38,14 @@ public class QuoteService {
 
     public List<Quote> quoteListCreation(List<Quote> quoteList) {
         for (int i = 0; i < quoteList.size(); i++){
-            System.out.println("API's Response = "+ quoteList.get(i));
-//            System.out.println("This is concatenation = " + bssList.get(i));
+//            System.out.println("API's Response = "+ quoteList.get(i));
             quoteList.set(i, this.parse(quoteList.get(i) +""));
 
-            System.out.println("Symbol: " + quoteList.get(i).getSymbol());
-            System.out.println("Price: " + quoteList.get(i).getPrice());
-            System.out.println("EPS: " + quoteList.get(i).getEps());
-            System.out.println("PE " + quoteList.get(i).getPe());
-            System.out.println(" ");
+//            System.out.println("Symbol: " + quoteList.get(i).getSymbol());
+//            System.out.println("Price: " + quoteList.get(i).getPrice());
+//            System.out.println("EPS: " + quoteList.get(i).getEps());
+//            System.out.println("PE " + quoteList.get(i).getPe());
+//            System.out.println(" ");
         }
         return quoteList;
 

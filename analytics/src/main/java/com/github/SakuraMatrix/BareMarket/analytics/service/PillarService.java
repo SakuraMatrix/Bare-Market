@@ -1,6 +1,8 @@
 package com.github.SakuraMatrix.BareMarket.analytics.service;
 
 import com.github.SakuraMatrix.BareMarket.analytics.domain.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -13,7 +15,7 @@ public class PillarService {
     private CompanyEnterpriseValueService companyEnterpriseValueService = new CompanyEnterpriseValueService();
     private IncomeStatementService incomeStatementService = new IncomeStatementService();
     private CashFlowStatementService cashFlowStatementService = new CashFlowStatementService();
-    private QuoteService quoteService = new QuoteService();
+//    private QuoteService quoteService = new QuoteService();
 
     private List<BalanceSheetStatement> bssList;
     private BalanceSheetStatement bss;
@@ -27,29 +29,33 @@ public class PillarService {
     private List<IncomeStatement> isList;
     private IncomeStatement is;
 
-    private List<Quote> quoteList;
-    private Quote quote;
+//    private List<Quote> quoteList;
+//    private Quote quote;
 
-    public PillarService(List<BalanceSheetStatement> bssList, List<CashFlowStatement> cfsList, List<CompanyEnterpriseValue> cevList, List<IncomeStatement> isList, List<Quote> quoteList){
+    @Bean
+    public WebClient.Builder getWebClientBuilder(){
+        return WebClient.builder();
+    }
+
+    public PillarService(List<BalanceSheetStatement> bssList, List<CashFlowStatement> cfsList, List<CompanyEnterpriseValue> cevList, List<IncomeStatement> isList){//, List<Quote> quoteList){
         this.bssList = balanceSheetStatementService.bssListCreation(bssList);
         this.cfsList = cashFlowStatementService.cfsListCreation(cfsList);
         this.cevList = companyEnterpriseValueService.cevListCreation(cevList);
         this.isList = incomeStatementService.isListCreation(isList);
-        this.quoteList = quoteService.quoteListCreation(quoteList);
+//        this.quoteList = quoteService.quoteListCreation(quoteList);
     }
 
     public String allPillars(){
-        String result1 = this.pillar1(this.isList, this.cevList, this.quoteList);
+        String result1 = this.pillar1(this.isList, this.cevList); // this.quoteList);
         String result2 = this.pillar2(this.cfsList, this.bssList.get(0));
         String result3 = this.pillar3(this.isList);
         String result4 = this.pillar4(this.isList);
 
         return result1 + "\n \n" + result2 + "\n \n" + result3 + "\n \n" + result4;
     }
-
-    public String pillar1(List<IncomeStatement> isList, List<CompanyEnterpriseValue> cevList, List<Quote> quoteList){
+    public String pillar1(List<IncomeStatement> isList, List<CompanyEnterpriseValue> cevList){ // this.quoteList){
         String listedInfo = "";
-        String info = "[" + "Most Recent <-> " + "Price: " + quoteList.get(0).getPrice() + " / " + "EPS: "+ quoteList.get(0).getEps() + " = " + "PE: " + quoteList.get(0).getPe() + "] \n";
+//        String info = "[" + "Most Recent <-> " + "Price: " + quoteList.get(0).getPrice() + " / " + "EPS: "+ quoteList.get(0).getEps() + " = " + "PE: " + quoteList.get(0).getPe() + "] \n";
         if (cevList.size() == 1){ //Checks for cevList being at least greater than 1 to proceed, or else stops analyzing the company due to being too young.
             return "Company too young to analyze using pillar 1";
         }
@@ -57,24 +63,23 @@ public class PillarService {
         ArrayList<Double> sumOfPe = new ArrayList<Double>();
         double averageOfPe = 0;
 
-        for (int i=0; i < isList.size()-1;i++){
+        for (int i=0; i < isList.size();i++){
             CompanyEnterpriseValue cevElement = cevList.get(i);
-            System.out.println("WEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE made it at least once");
             double stockPrice = cevElement.getStockPrice();
 
             double eps = isList.get(i).getEps();
-            if (eps < 0 && quoteList.get(0).getPe() == -11.11){
+            if (eps < 0){ //&& quoteList.get(0).getPe() == -11.11){
                 return "Pillar One[5YR PE] DANGER: Company has negative earning per share present.";
             }
             sumOfPe.add( stockPrice / eps ); //This will be doing the calculations for StockPrice / eps ; and store it into an arrayList.
-            System.out.println("pe being stored: " + sumOfPe.get(i));
+//            System.out.println("pe being stored: " + sumOfPe.get(i));
 
             listedInfo += "[" + isList.get(i).getDate() + " <--> " + "Price: " + cevList.get(i).getStockPrice() + " / " + "EPS: " + isList.get(i).getEps() + " = " + "PE:"+(cevList.get(i).getStockPrice()/isList.get(i).getEps() + "] \n");
         }
 
-        info += listedInfo;
+//        info += listedInfo;
 
-        sumOfPe.add(quoteList.get(0).getPe());
+//        sumOfPe.add(quoteList.get(0).getPe());
 
         for (int i=0; i < sumOfPe.size();i++){
             averageOfPe += sumOfPe.get(i);
@@ -82,9 +87,9 @@ public class PillarService {
 
         averageOfPe /= isList.size();
 
-        System.out.print("Average of current PE along with the past " + (isList.size()-1) + " PEs: " + averageOfPe);
+//        System.out.print("Average of current PE along with the past " + (isList.size()-1) + " PEs: " + averageOfPe);
 
-        return "Pillar One[5YR PE] calculated: " + averageOfPe + " =< 22.5 \n" + info;
+        return "Pillar One[5YR PE] calculated: " + averageOfPe + " =< 22.5 \n" + listedInfo;
     }
 
     public String pillar2(List<CashFlowStatement> cfsList, BalanceSheetStatement bss){
@@ -99,21 +104,21 @@ public class PillarService {
             fcfAverage = fcfAverage.add(BigDecimal.valueOf(cfsList.get(i).getFreeCashFlow()));
         }
 
-        System.out.println("Sum FreeCashFlow: " + fcfAverage) ;
+//        System.out.println("Sum FreeCashFlow: " + fcfAverage) ;
 
         result = fcfAverage.divide(BigDecimal.valueOf(cfsList.size()));
-        System.out.println("Average FreeCashFlow: " + result);
+//        System.out.println("Average FreeCashFlow: " + result);
 
         result = result.divide(divisor, 2, RoundingMode.HALF_UP);
-        System.out.println("TotalLiabilitiesAndStockholdersEquity: " + divisor);
-        System.out.println(fcfAverage + " / " + divisor + " = " + result);
+//        System.out.println("TotalLiabilitiesAndStockholdersEquity: " + divisor);
+//        System.out.println(fcfAverage + " / " + divisor + " = " + result);
 
 //        result = fcfAverage.divide(BigDecimal.valueOf(bss.getTotalLiabilitiesAndStockholdersEquity()));
 
 //        System.out.println("Average FreeCashFlow: " + fcfAverage.divide(BigDecimal.valueOf(bss.getTotalLiabilitiesAndStockholdersEquity()))) ;
 //        System.out.println("Average FreeCashFlow: " +  BigDecimal.valueOf(bss.getTotalLiabilitiesAndStockholdersEquity()).divide(fcfAverage));
 
-        return "Pillar Two[5YRE ROIC] calculated: " + result + " => 0.9%";
+        return "Pillar Two[5YRE ROIC] calculated: " + result + " => 0.09";
     }
 
     public String pillar3(List<IncomeStatement> isList) {
@@ -145,7 +150,6 @@ public class PillarService {
     }
 
     public String pillar4(List<IncomeStatement> isList){
-        //HashMap<String,Double> yearlyDifference = new HashMap<String, Double>();
         String result = "";
         String resultA = "";
         BigDecimal calculation;
@@ -247,20 +251,20 @@ public class PillarService {
         this.is = is;
     }
 
-    public List<Quote> getQuoteList() {
-
-        return quoteList;
-    }
-
-    public void setQuoteList(List<Quote> quoteList) {
-        this.quoteList = quoteList;
-    }
-
-    public Quote getQuote() {
-        return quote;
-    }
-
-    public void setQuote(Quote quote) {
-        this.quote = quote;
-    }
+//    public List<Quote> getQuoteList() {
+//
+//        return quoteList;
+//    }
+//
+//    public void setQuoteList(List<Quote> quoteList) {
+//        this.quoteList = quoteList;
+//    }
+//
+//    public Quote getQuote() {
+//        return quote;
+//    }
+//
+//    public void setQuote(Quote quote) {
+//        this.quote = quote;
+//    }
 }

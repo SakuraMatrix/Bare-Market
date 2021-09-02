@@ -1,7 +1,5 @@
 package com.github.SakuraMatrix.BareMarket.analytics.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 public interface ParsingService {
 
     /**
