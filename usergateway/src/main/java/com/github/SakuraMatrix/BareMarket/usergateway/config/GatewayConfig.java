@@ -15,6 +15,7 @@ public class GatewayConfig {
             .route(r -> r.path("/balances/**").uri("lb://balance-service"))
             .route(r -> r.path("/search/**").uri("lb://lookup-service"))
             .route(r -> r.path("/stocks/**").uri("lb://portfolio-service"))
+            .route(r -> r.path("/pillars/**").uri("lb://analytics-service"))
             .build();
     }
 }
