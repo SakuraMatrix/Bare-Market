@@ -1,6 +1,11 @@
 # Balance
 A service to manage a user's cash balance.
 
+## Features
+A user will be able to:
+- Retrieve information about their balance
+- Adjust their balance
+
 ## Table structure
 | id    | balance  |
 | ----- | -------- |

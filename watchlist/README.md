@@ -1,6 +1,12 @@
 # Watchlist
 A service to hold a list of favorite stocks to watch.
 
+## Features
+A user will be able to:
+- Retrieve their watchlist
+- Add a stock to their watchlist
+- Remove a stock from their watchlist
+
 ## Table structure
 | id    | symbol  |
 | ----- | ------- |

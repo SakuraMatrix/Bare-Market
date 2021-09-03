@@ -3,6 +3,13 @@ This service is the 'entry point', or gateway the user will access to make reque
 
 Additionally, this service comprises the additional handling of the logic between a user's cash balance and conducting trades.
 
+## Features
+A user will be able to:
+- access all other services comprising the Bare Market application
+- retrieve a live feed of their watchlist with up to date company quotes
+- purchase a stock, given their account has enough money to cover the trade
+- sell a stock and increase their balance accordingly
+
 ## Endpoints
 - GET `/summary`
 - POST `/holdings`

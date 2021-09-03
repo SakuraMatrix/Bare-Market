@@ -1,6 +1,10 @@
 # Lookup
 A service to look up a company's stock quote.
 
+## Features
+A user will be able to:
+- search for a company's stock quote
+
 ## Endpoints
 - GET `/search/{symbol}`
 
